@@ -8,9 +8,9 @@
 import SwiftUI
 
 @main
-struct CODECRAFT_AD_02__To_Do_list_app__App: App {
-    var body: some Scene{
-        WindowGroup{
+struct MyFirstApp: App {
+    var body: some Scene {
+        WindowGroup {
             ContentView()
         }
     }

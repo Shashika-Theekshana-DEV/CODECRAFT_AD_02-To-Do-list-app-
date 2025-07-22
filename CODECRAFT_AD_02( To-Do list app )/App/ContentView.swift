@@ -9,22 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            ContentView()
-                .tabItem{
-                 Label("To-Do", systemImage: "list.bullet")
-                }
-            
-            
-            SettingsView()
-                .tabItem {
-                Label("Settings", systemImage: "gear")
-                
-            }
-            
-        }
+        Text("Hello, World!")
     }
-}
-#Preview {
-    ContentView()
 }
