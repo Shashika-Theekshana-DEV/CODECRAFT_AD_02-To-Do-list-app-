@@ -5,7 +5,6 @@
 //  Created by shashika theekshana on BE 2568-07-22.
 //
 
-
 import Foundation
 import SwiftData
 
@@ -18,7 +17,6 @@ class EditTaskViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     @Published var errorMessage: String = ""
     
-    
     private var task: Task
     
     init(task: Task) {
@@ -29,33 +27,35 @@ class EditTaskViewModel: ObservableObject {
         self.priority = task.priority
     }
     
+    func getTask() -> Task? {
+        return task
+    }
+    
     func updateTask(context: ModelContext) -> Bool {
         guard !title.isEmpty else {
             errorMessage = "Title cannot be empty"
             showAlert = true
             return false
         }
+        
         guard dueDate > Date() else {
-            errorMessage = "Due date must be in future"
+            errorMessage = "Due date must be in the future"
             showAlert = true
             return false
         }
-        return true
-    }
-    
-    private func updateTaskProperties() {
+        
         task.title = title
         task.taskDescription = taskDescription
         task.dueDate = dueDate
         task.priority = priority
         
+        do {
+            try context.save()
+            return true
+        } catch {
+            errorMessage = "Failed to save changes"
+            showAlert = true
+            return false
+        }
     }
-    private  func handelError(_ error: Error) {
-        errorMessage = "Failed to Svae Changes:\(error.localizedDescription)"
-        showAlert = true
-    }
-    
-    
 }
-
-
